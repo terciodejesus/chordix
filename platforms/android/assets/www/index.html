@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>Hello World</title>
+  </head>
+  <body>
+    <input id="chordInput" type="text" />
+    <button id="playChord">Play!</button>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type='text/javascript' src='js/Tone.js'></script>
+    <script type='text/javascript' src='js/chordcypher.js'></script>
+
+    <script>
+      var button = document.getElementById("playChord");
+      var chord = '';
+
+      button.addEventListener("click", function(){
+        chord = document.getElementById("chordInput").value;
+        playChord(JSON.parse(chord))
+      });
+
+      window.setInterval(function(){
+        Tone.context.suspend();
+        Tone.context.resume();
+      }, 5000);
+    </script>
+  </body>
+</html>
