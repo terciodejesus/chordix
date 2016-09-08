@@ -25,10 +25,28 @@
 
     <script>
       getChords();
+      var refreshInterval;
 
-      window.setInterval(function(){
+      refreshInterval = window.setInterval(function(){
         soundFix.triggerAttackRelease();
       }, 5000);
+
+      document.addEventListener("resume", onResume, false);
+
+      function onResume() {
+        Tone.context.suspend();
+        Tone.context.resume();
+
+        refreshInterval = window.setInterval(function(){
+          soundFix.triggerAttackRelease();
+        }, 5000);
+      }
+
+      document.addEventListener("pause", onPause, false);
+
+      function onPause() {
+        clearInterval(refreshInterval);
+      }
     </script>
   </body>
 </html>
