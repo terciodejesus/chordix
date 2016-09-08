@@ -1,0 +1,23 @@
+_402={timingStart:1473302612696,timingTrStart:(new Date).getTime()};
+_402_Show=function(){_402.show();};
+_402.show=function(){};
+(function(){
+if(!window._402nosurvey){
+var n = document.createElement("script");
+n.setAttribute('charset', 'utf-8');
+n.setAttribute('type', 'text/javascript');
+n.setAttribute('src', '//survey.g.doubleclick.net/insights/consumersurveys/static/395459029960151314/prompt_embed_static__pt_br.js');
+var parent = document.getElementsByTagName('head')[0] ||
+  document.getElementByTagName('body')[0];
+parent.appendChild(n);}
+})();
+(function(){
+if(!window._402nosurvey){
+var n = document.createElement("script");
+n.setAttribute('charset', 'utf-8');
+n.setAttribute('type', 'text/javascript');
+n.setAttribute('src', '//survey.g.doubleclick.net/gk/prompt?site=_fxgwnzmb57qtge3pdwa3alyw54&t=1&url=https%3A%2F%2Fwww.cifraclub.com.br%2Flegiao-urbana%2Fque-pais-e-esse%2F&cid=everything&after=1'+'&random='+_402.timingTrStart+'&ref='+encodeURIComponent(document.referrer.substr(0,500)));
+var parent = document.getElementsByTagName('head')[0] ||
+  document.getElementByTagName('body')[0];
+parent.appendChild(n);}
+})();

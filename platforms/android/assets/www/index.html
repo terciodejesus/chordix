@@ -4,28 +4,30 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <title>Hello World</title>
-  </head>
-  <body>
-    <input id="chordInput" type="text" />
-    <button id="playChord">Play!</button>
+
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/foundation4.css" rel="stylesheet"/>
+
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type='text/javascript' src='js/Tone.js'></script>
-    <script type='text/javascript' src='js/chordcypher.js'></script>
+    <script type='text/javascript' src='js/chordcipher.js'></script>
+    <script type='text/javascript' src='js/jquery-3.1.0.min.js'></script>
+    <title>Hello World</title>
+  </head>
+  <body>
+
+    <div class="row container">
+      <div class="large-10 large-offset-1 medium-10 medium-offset-1 columns">
+        <ul id="chordsContainer" class="large-block-grid-5 small-block-grid-2"></ul>
+      </div>
+    </div>
 
     <script>
-      var button = document.getElementById("playChord");
-      var chord = '';
-
-      button.addEventListener("click", function(){
-        chord = document.getElementById("chordInput").value;
-        playChord(JSON.parse(chord))
-      });
+      getChords();
 
       window.setInterval(function(){
-        Tone.context.suspend();
-        Tone.context.resume();
+        soundFix.triggerAttackRelease();
       }, 5000);
     </script>
   </body>
