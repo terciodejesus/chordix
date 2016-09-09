@@ -22,7 +22,7 @@ function playChord(chord) {
 function getChords() {
   var html = null;
 
-  $.get("que_pais_e_esse.html", function(data) {
+  $.get("pais_e_filhos.html", function(data) {
     html = $(data).find('script');
 
     $(html).filter(function(){

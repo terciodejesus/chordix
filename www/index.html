@@ -36,6 +36,7 @@
       function onResume() {
         Tone.context.suspend();
         Tone.context.resume();
+        soundFix.triggerAttackRelease();
 
         refreshInterval = window.setInterval(function(){
           soundFix.triggerAttackRelease();
