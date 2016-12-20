@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta charset="utf-8">
+
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/foundation4.css" rel="stylesheet"/>
+
+    <!--
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type='text/javascript' src='js/Tone.js'></script>
+    <script type='text/javascript' src='js/chordcipher.js'></script>
+    -->
+    <script type='text/javascript' src='js/jquery-3.1.0.min.js'></script>
+    <title>Hello World</title>
+  </head>
+  <body>
+    <div class="row">
+      <div class="large-12 columns textarea-container">
+        <textarea class="textarea-input" placeholder="Cole aqui o código fonte"></textarea>
+      </div>
+      <div class="large-12 columns">
+        <button id="textareaBt" class="fluid bt">ENVIAR</button>
+      </div>
+    </div>
+    <div class="row margin-bottom-20">
+      <div class="large-offset-2 large-8 columns cipher"></div>
+    </div>
+    <div class="row">
+      <div class="large-offset-4 large-4 columns">
+        <button id="changeChord" class="fluid bt change-chord-bt">Troque</button>
+      </div>
+    </div>
+
+    <script>
+      var html = '';
+      var parsedChords = '';
+      var chords = []
+      var container;
+      var n = 0;
+
+      $("#textareaBt").click(function(){
+        html = $(".textarea-input").val();
+        cifra = $(html).find('.cifra_cnt');
+        $(".cipher").html(cifra);
+        $(".cipher").show();
+        $(".tablatura").remove();
+        $(".change-chord-bt").show();
+        n = 0;
+
+        html = $(html).find('script');
+
+        $(html).filter(function(){
+          var data = $(this);
+
+          var re = /chords.*]/i;
+          data.each(function(i, elem) {
+            var content = $(this).text();
+            var found = content.match(re);
+
+            if (found != null) {
+              var attr = found[0];
+
+              var chords = attr.split('chords:')[1];
+              parsedChords = JSON.parse(chords);
+
+              //parsed JSON with the array of chords
+              console.log(parsedChords);
+
+              //list_chords = parsedChords;
+              //mapChord(list_chords);
+            }
+          });
+        });
+
+        var j = 0;
+        $("b").each(function(){
+          for(i = 0; i < parsedChords.length; i++) {
+            if ($(this)[0].firstChild.data == parsedChords[i].chord) {
+              $(this).addClass("chord");
+              $(this).attr('id', j);
+              chords.push($(this));
+              j++;
+            }
+          }
+        })
+      });
+
+      var showChord = function(id) {
+        container = $(".cipher");
+
+        container.scrollTop(
+          $("#"+id).offset().top - container.offset().top + container.scrollTop()
+        );
+
+        $("#"+id).addClass('active');
+      }
+
+      $(".change-chord-bt").click(function(){
+        showChord(n);
+        n++;
+      });
+    </script>
+  </body>
+</html>

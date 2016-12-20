@@ -1,0 +1,47 @@
+body {
+  background-color: #ecf0f1 !important;
+}
+
+.textarea-container {
+  margin-top: 20px;
+}
+
+.textarea-input {
+  height: 200px;
+  border-radius: 5px;
+}
+
+.fluid {
+  width: 100%;
+}
+
+.bt {
+  border-radius: 5px;
+  border: none;
+}
+
+.cipher {
+  display: none;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  height: 200px;
+  overflow: auto;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px !important;
+}
+
+.change-chord-bt {
+  display: none;
+}
+
+b {
+  color: #ecf0f1;
+}
+
+.active {
+  color: red;
+}
