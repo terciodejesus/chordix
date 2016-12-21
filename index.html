@@ -19,20 +19,27 @@
     <title>Hello World</title>
   </head>
   <body>
-    <div class="row">
-      <div class="large-12 columns textarea-container">
-        <textarea class="textarea-input" placeholder="Cole aqui o código fonte"></textarea>
-      </div>
-      <div class="large-12 columns">
-        <button id="textareaBt" class="fluid bt">ENVIAR</button>
+    <div class="cipher-container">
+      <div class="row">
+        <div class="large-12 columns textarea-container">
+          <textarea class="textarea-input" placeholder="Cole aqui o código fonte"></textarea>
+        </div>
+        <div class="large-12 columns">
+          <button id="textareaBt" class="fluid bt">ENVIAR</button>
+        </div>
       </div>
     </div>
-    <div class="row margin-bottom-20">
+    <div class="row margin-bottom-20 margin-top-20">
       <div class="large-offset-2 large-8 columns cipher"></div>
     </div>
     <div class="row">
       <div class="large-offset-4 large-4 columns">
-        <button id="changeChord" class="fluid bt change-chord-bt">Troque</button>
+        <button id="playChord" class="fluid bt play-chord">Toque</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-offset-5 large-2 columns">
+        <button id="playChord" class="fluid bt back-chord">Voltar</button>
       </div>
     </div>
 
@@ -49,8 +56,14 @@
         $(".cipher").html(cifra);
         $(".cipher").show();
         $(".tablatura").remove();
-        $(".change-chord-bt").show();
+        $(".play-chord").show();
+        $(".back-chord").show();
+        $(".cipher-container").hide();
         n = 0;
+
+        $('html,body').animate({
+          scrollTop:$('.cipher').offset().top
+        }, 1000);
 
         html = $(html).find('script');
 
@@ -93,16 +106,29 @@
       var showChord = function(id) {
         container = $(".cipher");
 
-        container.scrollTop(
-          $("#"+id).offset().top - container.offset().top + container.scrollTop()
-        );
+        $(container).animate({
+          scrollTop:$("#"+id).offset().top - container.offset().top + container.scrollTop()
+        }, 280);
 
         $("#"+id).addClass('active');
       }
 
-      $(".change-chord-bt").click(function(){
+      var hideChord = function(id) {
+        $("#"+id).removeClass('active');
+      }
+
+      $(".play-chord").click(function(){
         showChord(n);
+        hideChord(n-1);
         n++;
+      });
+
+      $(".back-chord").click(function(){
+        if(n > 1) {
+          n--;
+          hideChord(n);
+          showChord(n-1);
+        }
       });
     </script>
   </body>
