@@ -57,3 +57,22 @@ b {
 .back-chord {
   display: none;
 }
+
+.circle {
+  background-color: #2284A1;
+  color: white;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  line-height: 100px;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  display: none;
+  font-weight: bold;
+}
+
+.back-chord {
+  margin-left: 18px;
+}
