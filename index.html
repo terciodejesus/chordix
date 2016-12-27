@@ -12,9 +12,10 @@
     <!--
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    -->
+
     <script type='text/javascript' src='js/Tone.js'></script>
     <script type='text/javascript' src='js/chordcipher.js'></script>
-    -->
     <script type='text/javascript' src='js/jquery-3.1.0.min.js'></script>
     <title>Hello World</title>
   </head>
@@ -82,7 +83,7 @@
               parsedChords = JSON.parse(chords);
 
               //parsed JSON with the array of chords
-              console.log(parsedChords);
+              //console.log(parsedChords);
 
               //list_chords = parsedChords;
               //mapChord(list_chords);
@@ -111,10 +112,24 @@
         }, 280);
 
         $("#"+id).addClass('active');
+        playChord($("#"+id)[0].firstChild.data);
       }
 
       var hideChord = function(id) {
         $("#"+id).removeClass('active');
+      }
+
+      var playChord = function(chord) {
+        var flag = true;
+        var i = 0;
+
+        while (flag) {
+          if (parsedChords[i].chord == chord) {
+            executeChord(parsedChords[i].guitar[0]);
+            flag = false;
+          }
+          i++;
+        }
       }
 
       $(".play-chord").click(function(){

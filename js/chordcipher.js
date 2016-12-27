@@ -11,10 +11,21 @@ var list_chords = null;
 
 var acoustic_notes = [e6, a5, d4, g3, b2, e1];
 
+/*
 function playChord(chord) {
   for(i = 0; i < chord.length; i++) {
     if (!isNaN(chord[i])) {
       acoustic_notes[i].triggerAttackRelease(Math.floor(chord[i]), 0.6, "+0");
+    }
+  }
+}
+*/
+
+function executeChord(shape) {
+  shape = shape.split(" ");
+  for(i = 0; i < shape.length; i++) {
+    if (!isNaN(shape[i])) {
+      acoustic_notes[i].triggerAttackRelease(Math.floor(shape[i]), 0.6, "+0");
     }
   }
 }
