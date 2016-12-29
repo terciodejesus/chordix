@@ -23,11 +23,40 @@ function playChord(chord) {
 
 function executeChord(shape) {
   shape = shape.split(" ");
-  for(i = 0; i < shape.length; i++) {
-    if (!isNaN(shape[i])) {
-      acoustic_notes[i].triggerAttackRelease(Math.floor(shape[i]), 0.6, "+0");
-    }
+
+  if (!isNaN(shape[0])) {
+    acoustic_notes[0].triggerAttack(Math.floor(shape[0]), "+0", 1);
   }
+
+  if (!isNaN(shape[1])) {
+    acoustic_notes[1].triggerAttack(Math.floor(shape[1]), "+0", 1);
+  }
+
+  if (!isNaN(shape[2])) {
+    acoustic_notes[2].triggerAttack(Math.floor(shape[2]), "+0", 1);
+  }
+
+  if (!isNaN(shape[3])) {
+    acoustic_notes[3].triggerAttack(Math.floor(shape[3]), "+0", 1);
+  }
+
+  if (!isNaN(shape[4])) {
+    acoustic_notes[4].triggerAttack(Math.floor(shape[4]), "+0", 1);
+  }
+
+  if (!isNaN(shape[5])) {
+    acoustic_notes[5].triggerAttack(Math.floor(shape[5]), "+0", 1);
+  }
+}
+
+
+function clear() {
+  e1.triggerRelease();
+  b2.triggerRelease();
+  g3.triggerRelease();
+  d4.triggerRelease();
+  a5.triggerRelease();
+  e6.triggerRelease();
 }
 
 function getChords() {
