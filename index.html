@@ -20,16 +20,12 @@
     <title>Hello World</title>
   </head>
   <body>
-    <div class="cipher-container">
-      <div class="row">
-        <div class="large-12 columns textarea-container">
-          <textarea class="textarea-input" placeholder="Cole aqui o código fonte"></textarea>
-        </div>
-        <div class="large-12 columns">
-          <button id="textareaBt" class="fluid bt">ENVIAR</button>
-        </div>
+    <div class="row">
+      <div class="large-12 columns margin-top-20">
+        <a id="link" href="https://chordcipher-api.herokuapp.com/generate_html">Pais e Filhos</a>
       </div>
     </div>
+
     <div class="row margin-bottom-20 margin-top-20">
       <div class="large-offset-2 large-8 columns cipher"></div>
     </div>
@@ -61,59 +57,6 @@
       var chords = []
       var container;
       var n = 0;
-
-      $("#textareaBt").click(function(){
-        html = $(".textarea-input").val();
-        cifra = $(html).find('.cifra_cnt');
-        $(".cipher").html(cifra);
-        $(".cipher").show();
-        $(".tablatura").remove();
-        $(".play-chord").show();
-        $(".back-chord").show();
-        $(".cipher-container").hide();
-        $(".circle").show();
-
-        $('html,body').animate({
-          scrollTop:$('.cipher').offset().top
-        }, 1000);
-
-        html = $(html).find('script');
-
-        $(html).filter(function(){
-          var data = $(this);
-
-          var re = /chords.*]/i;
-          data.each(function(i, elem) {
-            var content = $(this).text();
-            var found = content.match(re);
-
-            if (found != null) {
-              var attr = found[0];
-
-              var chords = attr.split('chords:')[1];
-              parsedChords = JSON.parse(chords);
-
-              //parsed JSON with the array of chords
-              //console.log(parsedChords);
-
-              //list_chords = parsedChords;
-              //mapChord(list_chords);
-            }
-          });
-        });
-
-        var j = 0;
-        $("b").each(function(){
-          for(i = 0; i < parsedChords.length; i++) {
-            if ($(this)[0].firstChild.data == parsedChords[i].chord) {
-              $(this).addClass("chord");
-              $(this).attr('id', j);
-              chords.push($(this));
-              j++;
-            }
-          }
-        })
-      });
 
       var showChord = function(id) {
         container = $(".cipher");
@@ -196,6 +139,67 @@
           showChord(n);
         }
       });
+
+
+    $("#link").click(function(e){
+      e.preventDefault();
+      requestHtml($(this).attr("href"));
+      console.log("aqui");
+    });
+
+    var requestHtml = function(url) {
+
+      $.get(url, function(data) {
+        cifra = $(data).find('.cifra_cnt');
+        $(".cipher").html(cifra);
+        $(".cipher").show();
+        $(".tablatura").remove();
+        $(".play-chord").show();
+        $(".back-chord").show();
+        $(".circle").show();
+
+        $('html,body').animate({
+          scrollTop:$('.cipher').offset().top
+        }, 1000);
+
+        html = $(data).find('script');
+
+        $(html).filter(function(){
+          var data = $(this);
+          var re = /chords.*]/i;
+
+          data.each(function(i, elem) {
+            var content = $(this).text();
+            var found = content.match(re);
+
+            if (found != null) {
+              var attr = found[0];
+
+              var chords = attr.split('chords:')[1];
+              parsedChords = JSON.parse(chords);
+
+              //parsed JSON with the array of chords
+              //console.log(parsedChords);
+
+              //list_chords = parsedChords;
+              //mapChord(list_chords);
+            }
+          });
+        });
+
+        var j = 0;
+        $("b").each(function(){
+          for(i = 0; i < parsedChords.length; i++) {
+            if ($(this)[0].firstChild.data == parsedChords[i].chord) {
+              $(this).addClass("chord");
+              $(this).attr('id', j);
+              chords.push($(this));
+              j++;
+            }
+          }
+        })
+      });
+    }
     </script>
   </body>
 </html>
