@@ -22,7 +22,10 @@
   <body>
     <div class="row">
       <div class="large-12 columns margin-top-20">
-        <a id="link" href="https://chordcipher-api.herokuapp.com/generate_html">Pais e Filhos</a>
+        <a id="link" data-title="pais_e_filhos" href="https://chordcipher-api.herokuapp.com/generate_html">Pais e Filhos</a>
+      </div>
+      <div class="large-12 columns margin-top-20">
+        <a id="link" data-title="sapato_velho" href="https://chordcipher-api.herokuapp.com/generate_html">Sapato Velho</a>
       </div>
     </div>
 
@@ -143,14 +146,14 @@
 
     $("#link").click(function(e){
       e.preventDefault();
-      requestHtml($(this).attr("href"));
-      console.log("aqui");
+      requestHtml($(this).attr("href"), $(this).attr("data-title"));
     });
 
-    var requestHtml = function(url) {
+    var requestHtml = function(url, cipherTitle) {
 
-      $.get(url, {cipher: "pais_e_filhos"}, function(data) {
+      $.get(url, {cipher: cipherTitle}, function(data) {
         cifra = $(data).find('.cifra_cnt');
+        n = 0;
         $(".cipher").html(cifra);
         $(".cipher").show();
         $(".tablatura").remove();
