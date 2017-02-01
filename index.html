@@ -149,7 +149,7 @@
 
     var requestHtml = function(url) {
 
-      $.get(url, function(data) {
+      $.get(url, {cipher: "pais_e_filhos"}, function(data) {
         cifra = $(data).find('.cifra_cnt');
         $(".cipher").html(cifra);
         $(".cipher").show();
