@@ -76,3 +76,27 @@ b {
 .back-chord {
   margin-left: 18px;
 }
+
+.fluid {
+  width: 100%;
+}
+
+.chord-bt {
+  border-radius: 5px;
+  border: none;
+}
+
+.content-url {
+  margin-top: 50px;
+}
+
+input[type="text"].chord-input-text {
+  border-radius: 5px;
+  box-shadow: none;
+  height: 45px;
+}
+
+.no-margin {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
