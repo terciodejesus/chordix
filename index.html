@@ -138,7 +138,7 @@
         }
       });
 
-      $("#backChord").click(function(){
+      $("#backChord").on('touchstart click', function(){
         if(n > 0) {
           n--;
           hideChord(n+1);
