@@ -9,28 +9,13 @@
     <link href="css/style.css" rel="stylesheet"/>
     <link href="css/foundation4.css" rel="stylesheet"/>
 
-    <!--
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    -->
-
     <script type='text/javascript' src='js/Tone.js'></script>
-    <script type='text/javascript' src='js/chordcipher.js'></script>
+    <script type='text/javascript' src='js/chordix.js'></script>
     <script type='text/javascript' src='js/jquery-3.1.0.min.js'></script>
-    <title>Hello World</title>
+    <title>Chordix</title>
   </head>
   <body>
-    <div class="row">
-      <!--
-      <div class="large-12 columns margin-top-20">
-        <a id="link" href="https://chordcipher-api.herokuapp.com/generate_html?cipher=pais_e_filhos">Pais e Filhos</a>
-      </div>
-      <div class="large-12 columns margin-top-20">
-        <a id="link2" href="https://chordcipher-api.herokuapp.com/generate_html?cipher=sapato_velho">Sapato Velho</a>
-      </div>
-    </div>
-    -->
-
+  <div class="row">
     <div class="large-offset-3 large-6 columns content-url">
       <div class="row">
         <div class="large-12 columns">
@@ -41,38 +26,49 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="row">
-      <div class="large-12 columns">
-        <div class="row margin-bottom-20 margin-top-20 no-margin">
-          <div class="large-offset-2 large-8 columns">
-            <div class="cipher"></div>
-          </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row margin-bottom-20 margin-top-20 no-margin">
+        <div class="large-offset-2 large-8 columns">
+          <div class="cipher"></div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="row">
-      <div class="small-offset-1 small-10 large-offset-4 large-5 columns">
-        <ul class="large-block-grid-2">
-          <li>
-            <div id="playChord" class="circle">Tocar</div>
-          </li>
-          <li>
-            <div id="nextChord" class="circle">Tocar</div>
-          </li>
-        </ul>
-      </div>
+  <div class="row">
+    <div class="small-offset-1 small-10 large-offset-4 large-5 columns">
+      <ul class="large-block-grid-2">
+        <li>
+        <div id="playChord" class="circle">
+          Tocar 1
+          <div class="show-for-large-up small-text">( X )</div>
+        </div>
+        </li>
+        <li>
+        <div id="nextChord" class="circle">
+          Tocar 2
+          <div class="show-for-large-up small-text">( Z )</div>
+        <div>
+        </div>
+        </li>
+      </ul>
     </div>
-    <div class="row">
-      <div class="small-offset-3 small-7 large-offset-5 large-5 columns">
-        <ul class="large-block-grid-2">
-          <li>
-            <div id="backChord" class="circle back-chord">Voltar</div>
-          </li>
-        </ul>
-      </div>
+  </div>
+  <div class="row">
+    <div class="small-offset-3 small-7 large-offset-5 large-5 columns">
+      <ul class="large-block-grid-2">
+        <li>
+        <div id="backChord" class="circle back-chord">
+          Voltar<br/>
+          <div class="show-for-large-up small-text">( backspace )</div>
+        </div>
+        </li>
+      </ul>
     </div>
+  </div>
 
     <script>
       var html = '';
@@ -99,7 +95,6 @@
       var playChord = function(chord) {
         var flag = true;
         var i = 0;
-
         while (flag) {
           if (parsedChords[i].chord == chord) {
             executeChord(parsedChords[i].guitar[0]);
@@ -109,7 +104,7 @@
         }
       }
 
-      $("#playChord").click(function(){
+      $("#playChord").on('touchstart click', function(){
         if(!$(this).hasClass("current") && !$("#nextChord").hasClass("current")) {
           $(this).addClass("current");
           showChord(n);
@@ -126,7 +121,7 @@
         }
       });
 
-      $("#nextChord").click(function(){
+      $("#nextChord").on('touchstart click', function(){
         if(!$(this).hasClass("current") && !$("#playChord").hasClass("current")) {
           $(this).addClass("current");
           showChord(n);
@@ -143,7 +138,7 @@
         }
       });
 
-      $("#backChord").click(function(){
+      $("#backChord").on('touchstart click', function(){
         if(n > 0) {
           n--;
           hideChord(n+1);
@@ -217,6 +212,53 @@
         })
       });
     }
+
+    window.addEventListener('keydown', function(e){
+      // key z
+      if(e.keyCode == '90') {
+        if(!$("#playChord").hasClass("current") && !$("#nextChord").hasClass("current")) {
+          $("#playChord").addClass("current");
+          showChord(n);
+          hideChord(n-1);
+        } else if($("#playChord").hasClass("current")) {
+          showChord(n);
+          hideChord(n-1);
+        } else if(!$("#playChord").hasClass("current")) {
+          n++;
+          $("#playChord").addClass("current");
+          $("#nextChord").removeClass("current");
+          showChord(n);
+          hideChord(n-1);
+        }
+      }
+
+      // key x
+      if(e.keyCode == '88') {
+        if(!$("#nextChord").hasClass("current") && !$("#playChord").hasClass("current")) {
+          $("#nextChord").addClass("current");
+          showChord(n);
+          hideChord(n-1);
+        } else if($("#nextChord").hasClass("current")) {
+          showChord(n);
+          hideChord(n-1);
+        } else if(!$("#nextChord").hasClass("current")) {
+          n++;
+          $("#nextChord").addClass("current");
+          $("#playChord").removeClass("current");
+          showChord(n);
+          hideChord(n-1);
+        }
+      }
+
+      // key backspace
+      if(e.keyCode == '8') {
+        if(n > 0) {
+          n--;
+          hideChord(n+1);
+          showChord(n);
+        }
+      }
+    });
     </script>
   </body>
 </html>

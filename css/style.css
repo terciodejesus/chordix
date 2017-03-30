@@ -100,3 +100,9 @@ input[type="text"].chord-input-text {
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
+
+.small-text {
+  font-size: 10px;
+  margin-top: -80px;
+  text-align: center;
+}
