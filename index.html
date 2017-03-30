@@ -104,7 +104,7 @@
         }
       }
 
-      $("#playChord").on('touchstart click', function(){
+      $("#playChord").on('click', function(){
         if(!$(this).hasClass("current") && !$("#nextChord").hasClass("current")) {
           $(this).addClass("current");
           showChord(n);
@@ -121,7 +121,7 @@
         }
       });
 
-      $("#nextChord").on('touchstart click', function(){
+      $("#nextChord").on('click', function(){
         if(!$(this).hasClass("current") && !$("#playChord").hasClass("current")) {
           $(this).addClass("current");
           showChord(n);
@@ -138,7 +138,7 @@
         }
       });
 
-      $("#backChord").on('touchstart click', function(){
+      $("#backChord").on('click', function(){
         if(n > 0) {
           n--;
           hideChord(n+1);
