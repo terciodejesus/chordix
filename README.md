@@ -7,3 +7,6 @@ instrumentalists unavailability for the development and playback dependency.
 
 # Take a virtual guitar, turn up the volume and enjoy!
 The demo application can be tested [here](https://terciodejesus.github.io/chordix/) with example url for [Love is Not a Fight - Warren Barfield](https://www.cifraclub.com.br/warren-barfield/love-is-not-fight/) .
+
+# Chordix API
+https://github.com/terciodejesus/chordix-api
